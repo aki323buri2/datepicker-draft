@@ -1,0 +1,47 @@
+{
+  "name": "datepicker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.1.0",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0",
+    "babel-polyfill": "*",
+    "babel-preset-env": "*",
+    "babel-preset-react": "*",
+    "clean-webpack-plugin": "*",
+    "html-webpack-plugin": "*",
+    "extract-text-webpack-plugin": "next",
+    "babel-loader": "*",
+    "file-loader": "*",
+    "img-loader": "*",
+    "style-loader": "*",
+    "css-loader": "*",
+    "sass-loader": "*",
+    "postcss-loader": "*",
+    "node-sass": "*"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^0.16.0",
+    "moment": "*",
+    "numeral": "*",
+    "filesize": "*",
+    "classnames": "*",
+    "bulma": "*",
+    "bulma-extensions": "*",
+    "mdi": "*",
+    "@fortawesome/fontawesome-free-webfonts": "*"
+  }
+}

@@ -1,0 +1,82 @@
+$mdi-font-path: '~mdi/fonts' !default;
+$fa-font-path: '~@fortawesome/fontawesome-free-webfonts/webfonts' !default;
+@import '~mdi/scss/materialdesignicons';
+@import '~@fortawesome/fontawesome-free-webfonts/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-solid';
+@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-regular';
+@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-brands';
+
+@import '~bulma/bulma';
+$base-color: $info !default;
+$active-color: $base-color;
+$sunday-color: $red;
+$saturday-color: $primary;
+$calendar-header-background-color: $base-color !default;
+$calendar-today-border-color: $base-color !default;
+$calendar-today-color: $base-color !default;
+$calendar-range-background-color: lighten($base-color, 50%) !default;
+@import '~bulma-extensions/bulma-calendar/dist/bulma-calendar';
+.calendar
+{
+	.calendar-nav
+	{
+		.calendar-previous-month, 
+		.calendar-next-month
+		{
+			button
+			{
+				background: $calendar-header-background-color;
+				border-color: $calendar-header-background-color;
+				color: findColorInvert($calendar-header-background-color);
+				&:hover
+				{
+					background: darken($calendar-header-background-color, 5%);
+				}
+			}
+		}
+	}
+	.calendar-header
+	{
+		background: darken($calendar-header-background-color, 5%);
+		.calendar-date
+		{
+			color: findColorInvert($calendar-header-background-color);
+		}
+	}
+	.calendar-body
+	{
+		.calendar-date
+		{
+			.date-item
+			{
+				&.is-active
+				{
+					background: $active-color;
+					border-color: $active-color;
+					color: findColorInvert($active-color);
+				}
+			}
+			&.is-sunday, 
+			&.is-sunday .date-item
+			{
+				color: $sunday-color;
+				font-weight: 700;
+				&.is-active
+				{
+					color: findColorInvert($active-color);
+				}
+			}
+			&.is-sunday, 
+			&.is-saturday .date-item
+			{
+				color: $saturday-color;
+				font-weight: 700;
+				&.is-active
+				{
+					color: findColorInvert($active-color);
+				}
+			}
+		}
+	}
+}
+
