@@ -1,21 +1,16 @@
-const path  = require('path');
+const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const browsers = [ 'ie 10', 'last 2 versions' ];
 module.exports = {
-	mode: 'development', 
-	entry: './src/index.js',
+	entry: './src/index.js', 
 	output: {
 		path: path.resolve(__dirname, 'dist'), 
 		filename: '[name].js', 
 	}, 
-	devServer: {
-		host: '0.0.0.0', 
-		port: 3000, 
-		disableHostCheck: true, 
-	}, 
-	plugins :[
+	mode: 'development', 
+	plugins: [
 		new CleanWebpackPlugin([
 			'./dist', 
 		]), 
@@ -26,6 +21,11 @@ module.exports = {
 			'[name].css'
 		), 
 	], 
+	devServer: {
+		host: '0.0.0.0', 
+		port: 3000, 
+		disableHostCheck: true, 
+	}, 
 	module: {
 		rules: [
 			{
@@ -34,15 +34,15 @@ module.exports = {
 				use: [
 					{
 						loader: 'babel-loader', 
-						options: { 
+						options: {
 							presets: [
 								[ 'env', { targets: { browsers } } ], 
 								'react', 
 							], 
 							plugins: [
-								'transform-object-rest-spread', 
-								'transform-class-properties', 
-								'transform-decorators', 
+								'transform-object-rest-spread',
+								'transform-class-properties',
+								'transform-decorators',
 							], 
 						}, 
 					}, 
@@ -58,28 +58,27 @@ module.exports = {
 						}, 
 						{
 							loader: 'postcss-loader', 
-							options: { plugins: [ require('autoprefixer')({ targets: { browsers } }) ] }, 
+							options: { plugins: [
+								require('autoprefixer')({ targets: { browsers } }) 
+							]}, 
 						}, 
 						{
-							loader: 'sass-loader', 
+							loader: 'sass-loader'
 						}, 
 					], 
 				}), 
 			}, 
 			{
-				test: /(\.(eot|[ot]tf|woff2?)|.*font.*\.svg)$/, 
+				test: /(.*font.*\.svg|\.(eot|woff2?|[ot]tf))$/, 
 				use: [
 					{
 						loader: 'file-loader', 
 						options: {
-							name: path =>
-							{
-								return path.replace(/.*node_modules\//, 'fonts/vendor/');
-							}
+							name: path => path.replace(/.*node_modules\//, 'fonts/vendoer/') + '?[hash]', 
 						}, 
 					}, 
 				], 
-			}, 
+			},
 		], 
 	}, 
 };
