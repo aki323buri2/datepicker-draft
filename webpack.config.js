@@ -4,15 +4,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const browsers = [ 'ie 10', 'last 2 versions' ];
 module.exports = {
+	mode: 'development', 
+	devServer: {
+		host: '0.0.0.0', 
+		port: 3000, 
+		disableHostCheck: true, 
+	}, 
 	entry: './src/index.js', 
 	output: {
 		path: path.resolve(__dirname, 'dist'), 
 		filename: '[name].js', 
 	}, 
-	mode: 'development', 
 	plugins: [
 		new CleanWebpackPlugin([
-			'./dist', 
+			'dist', 
 		]), 
 		new HtmlWebpackPlugin({
 			title: 'development', 
@@ -21,11 +26,6 @@ module.exports = {
 			'[name].css'
 		), 
 	], 
-	devServer: {
-		host: '0.0.0.0', 
-		port: 3000, 
-		disableHostCheck: true, 
-	}, 
 	module: {
 		rules: [
 			{
@@ -40,9 +40,9 @@ module.exports = {
 								'react', 
 							], 
 							plugins: [
-								'transform-object-rest-spread',
-								'transform-class-properties',
-								'transform-decorators',
+								'transform-object-rest-spread', 
+								'transform-class-properties', 
+								'transform-decorators', 
 							], 
 						}, 
 					}, 
@@ -55,15 +55,13 @@ module.exports = {
 					use: [
 						{
 							loader: 'css-loader', 
-						}, 
+						},
 						{
 							loader: 'postcss-loader', 
-							options: { plugins: [
-								require('autoprefixer')({ targets: { browsers } }) 
-							]}, 
+							options: { plugins: [ require('autoprefixer')({ targets: { browsers } }) ] }, 
 						}, 
-						{
-							loader: 'sass-loader'
+						{ 
+							loader: 'sass-loader', 
 						}, 
 					], 
 				}), 
@@ -73,12 +71,12 @@ module.exports = {
 				use: [
 					{
 						loader: 'file-loader', 
-						options: {
-							name: path => path.replace(/.*node_modules\//, 'fonts/vendoer/') + '?[hash]', 
+						options: { 
+							name: path => path.replace(/.*node_modules\//, 'fonts/vendor/') + '?[hash', 
 						}, 
 					}, 
 				], 
-			},
+			}, 
 		], 
 	}, 
 };
