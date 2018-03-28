@@ -6,6 +6,15 @@ import _ from 'lodash';
 import numeral from 'numeral';
 import classnames from 'classnames';
 const nn = r => n => numeral(n).format('0'.repeat(r));
+Object.assign(Node.prototype, {
+	on : function (e, handler) { _.castArray(e).map(e => this.addEventListener(e, handler)); }, 
+	off: function (e, handler) { _.castArray(e).map(e => this.removeEventListener(e, handler)); }, 
+	hittest: function (x, y)
+	{
+		const { left, top, right, bottom } = this.getBoundingClientRect();
+		return _.inRange(x, left, right) && _.inRange(y, top, bottom);
+	}, 
+});
 const Datepicker = class extends React.Component
 {
 	static defaultProps = {
@@ -24,8 +33,11 @@ const Datepicker = class extends React.Component
 	}
 	componentDidMount()
 	{
-		this.input = this.dom().querySelector('.dateinput .input');
-		this.calendar = this.dom().querySelector('.calendar');
+		this.input = this.dom().querySelector('.dateinput-component .input');
+		this.calendar = this.dom().querySelector('.calendar-component');
+	}
+	componentWillUnmount()
+	{
 	}
 	render()
 	{
@@ -62,12 +74,14 @@ const Dateinput = class extends React.Component
 		formats: [
 			'YYYY-MM-DD', 
 			'M.D',
+			'M/D', 
+			'M-D', 
 			'YY.M.D',
+			'YY/M/D',  
+			'YY-M-D',  
 			'MMDD', 
 			'YYMMDD', 
 			'YYYYMMDD', 
-			'M/D', 
-			'Y.M.D', 
 		], 
 		onChange: _.noop, 
 		onBlur: _.noop, 
