@@ -5,15 +5,15 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const browsers = [ 'ie 10', 'last 2 versions' ];
 module.exports = {
 	mode: 'development', 
+	entry: './src/index.js', 
+	output: {
+		path: path.resolve(__dirname, './dist'), 
+		filename: '[name].js', 
+	}, 
 	devServer: {
 		host: '0.0.0.0', 
 		port: 3000, 
 		disableHostCheck: true, 
-	}, 
-	entry: './src/index.js', 
-	output: {
-		path: path.resolve(__dirname, 'dist'), 
-		filename: '[name].js', 
 	}, 
 	plugins: [
 		new CleanWebpackPlugin([
@@ -23,7 +23,7 @@ module.exports = {
 			title: 'development', 
 		}), 
 		new ExtractTextWebpackPlugin(
-			'[name].css'
+			'[name].css', 
 		), 
 	], 
 	module: {
@@ -42,10 +42,10 @@ module.exports = {
 							plugins: [
 								'transform-object-rest-spread', 
 								'transform-class-properties', 
-								'transform-decorators', 
+								'transform-decorators-legacy', 
 							], 
 						}, 
-					}, 
+					}
 				], 
 			}, 
 			{
@@ -55,24 +55,24 @@ module.exports = {
 					use: [
 						{
 							loader: 'css-loader', 
-						},
+						}, 
 						{
 							loader: 'postcss-loader', 
 							options: { plugins: [ require('autoprefixer')({ targets: { browsers } }) ] }, 
 						}, 
-						{ 
+						{
 							loader: 'sass-loader', 
 						}, 
 					], 
 				}), 
 			}, 
 			{
-				test: /(.*font.*\.svg|\.(eot|woff2?|[ot]tf))$/, 
+				test: /(.*font.*\.svg|\.([ot]tf|eot|woff2?))$/, 
 				use: [
 					{
 						loader: 'file-loader', 
-						options: { 
-							name: path => path.replace(/.*node_modules\//, 'fonts/vendor/') + '?[hash', 
+						options: {
+							name: path => path.replace(/.*node_modules\//, 'fonts/vendor/') + '?[hash]', 
 						}, 
 					}, 
 				], 

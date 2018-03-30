@@ -8,7 +8,7 @@ Promise.resolve().then(e =>
 });
 const App = ({
 }) => (
-	<div className="app box">
+	<div className="app-component box">
 		<Datepicker/>
 	</div>
 );

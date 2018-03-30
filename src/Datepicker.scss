@@ -1,39 +1,37 @@
+
 $mdi-font-path: '~mdi/fonts' !default;
 $fa-font-path: '~@fortawesome/fontawesome-free-webfonts/webfonts' !default;
 @import '~mdi/scss/materialdesignicons';
-@import '~@fortawesome/fontawesome-free-webfonts/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-solid';
-@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-regular';
 @import '~@fortawesome/fontawesome-free-webfonts/scss/fa-brands';
+@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-regular';
+@import '~@fortawesome/fontawesome-free-webfonts/scss/fa-solid';
+@import '~@fortawesome/fontawesome-free-webfonts/scss/fontawesome';
+
 
 @import '~bulma/bulma';
 
-
-$calendar-header-background-color: $info !default;
-$calendar-today-border-color: $calendar-header-background-color !default;
-$calendar-today-color: $calendar-header-background-color !default;
+$calendar-base-color: $info !default;
+$calendar-header-background-color: $calendar-base-color !default;
+$calendar-today-border-color: $calendar-base-color !default;
+$calendar-today-color: $calendar-base-color !default;
+$calendar-range-background-color: lighten($calendar-base-color, 50%) !default;
 
 @import '~bulma-extensions/bulma-calendar/dist/bulma-calendar';
 
-$invalid-color: $red;
-.dateinput-component
-{
-	.input
-	{
-		&.is-invalid
-		{
-			border-color: $invalid-color;
-			background: lighten($invalid-color, 30%);
-		}
-	}
-}
+$calendar-month-button-bacground-color: $calendar-header-background-color !default;
+$calendar-weekdays-header-background-color: darken($calendar-header-background-color, 5%);
 
-$calendar-color-sunday: $red;
-$calendar-color-saturday: $green;
-$calendar-header-weekdays-background-color: darken($calendar-header-background-color, 5%);
-	
+$calendar-active-date-background-color: $calendar-base-color;
+
 .calendar-component
 {
+	position: absolute;
+	border: 1px solid $calendar-base-color;
+
+	&:not(.is-visible)
+	{
+		display: none;
+	}
 	.calendar
 	{
 		.calendar-nav
@@ -43,46 +41,64 @@ $calendar-header-weekdays-background-color: darken($calendar-header-background-c
 			{
 				.button
 				{
-					background: $calendar-header-background-color;
-					border-color: $calendar-header-background-color;
-					color: findColorInvert($calendar-header-background-color);
+					background: $calendar-month-button-bacground-color;
+					border-color: $calendar-month-button-bacground-color;
+					color: findColorInvert($calendar-month-button-bacground-color);
 					&:hover
 					{
-						background: darken($calendar-header-background-color, 10%);
+						background: darken($calendar-month-button-bacground-color, 5%);
 					}
 				}
 			}
 		}
-		.calendar-header
+		.calendar-container
 		{
-			background: $calendar-header-weekdays-background-color;
-			.calendar-date
+			.calendar-header
 			{
-				color: findColorInvert($calendar-header-weekdays-background-color);
+				background: $calendar-weekdays-header-background-color;
+				.calendar-date
+				{
+					color: findColorInvert($calendar-weekdays-header-background-color);
+				}
+			}
+			.calendar-body
+			{
+				.calendar-date
+				{
+					.date-item
+					{
+						&.is-active
+						{
+							background: $calendar-active-date-background-color;
+							border-color: $calendar-active-date-background-color;
+							color: findColorInvert($calendar-active-date-background-color);
+						}
+					}
+				}
+				.calendar-range
+				{
+					.date-item
+					{
+						color: $calendar-base-color;
+					}
+				}
 			}
 		}
-		.calendar-body
+	}
+}
+
+$dateinput-invalid-color: $red !default;
+$dateinput-invalid-background-color: lighten($dateinput-invalid-color, 20%) !default;
+.datepicker-component
+{
+	.dateinput-component
+	{
+		.input
 		{
-			.calendar-date
+			&.is-invalid
 			{
-				&.is-sunday .date-item
-				{
-					font-weight: 700;
-					color: $calendar-color-sunday;
-					&.is-active
-					{
-						color: $white;
-					}
-				}
-				&.is-saturday .date-item
-				{
-					font-weight: 700;
-					color: $calendar-color-saturday;
-					&.is-active
-					{
-						color: $white;
-					}
-				}
+				background: $dateinput-invalid-background-color;
+				border-color: $dateinput-invalid-color;
 			}
 		}
 	}
